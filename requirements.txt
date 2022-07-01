@@ -1,0 +1,5 @@
+fastapi
+uvicorn[standard]
+sqlmodel
+email-validator
+psycopg2-binary
