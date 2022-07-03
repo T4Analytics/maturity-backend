@@ -1,3 +1,4 @@
+import json
 from typing import List, Dict
 from fastapi import FastAPI
 from modules.helpers import Helpers
@@ -33,8 +34,11 @@ def root():
 	return h.err(303, {"url": c.docsurl})
 
 
-@app.post("/api/v1/form", response_model=List)
+@app.post("/api/v1/submit", response_model=List)
 async def save_form(record: Dict):
+	record["formdata"] = json.dumps(record["formdata"])
+	h.log(record)
 	retval = h.adding_endpoint("forms", [record])
+	h.log(retval)
 	return retval
 
